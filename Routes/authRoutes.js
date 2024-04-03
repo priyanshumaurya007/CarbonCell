@@ -19,7 +19,7 @@ const authMiddleware = require('../Middleware/authMiddleware')
  *   post:
  *     summary: Register a new user
  *     description: Register a new user with the provided username and password.
- *     tags: [User]
+ *     tags: [User Task-1]
  *     requestBody:
  *       required: true
  *       content:
@@ -53,7 +53,7 @@ router.post('/user/register', authController.registerUser);
  *   post:
  *     summary: Login user
  *     description: Authenticate and login the user with the provided username and password.
- *     tags: [User]
+ *     tags: [User Task-1]
  *     requestBody:
  *       required: true
  *       content:
@@ -94,7 +94,7 @@ router.post('/user/login', authController.loginUser);
  *   post:
  *     summary: Logout user
  *     description: Logout the currently logged-in user.
- *     tags: [User]
+ *     tags: [User Task-1]
  *     security:
  *       - bearerAuth: []
  *     responses:
@@ -114,7 +114,7 @@ router.post('/user/logout', authMiddleware.verifyToken, authController.logoutUse
  *   get:
  *     summary: Protected route
  *     description: Access a protected route that requires authentication.
- *     tags: [User]
+ *     tags: [User Task-1]
  *     security:
  *       - bearerAuth: []
  *     responses:
