@@ -9,7 +9,7 @@ const authMiddleware = require('../Middleware/authMiddleware')
  *   get:
  *     summary: Fetch data from a public API
  *     description: Fetch data from a public API with optional filtering options, requiring authentication.
- *     tags: [Data]
+ *     tags: [Data Task-2, Task-4]
  *     parameters:
  *       - in: query
  *         name: category
@@ -87,6 +87,54 @@ const authMiddleware = require('../Middleware/authMiddleware')
  */
 
 router.get('/data/retrieve', authMiddleware.verifyToken, apiController.fetchData);
+
+/**
+ * @swagger
+ * /api/v1/ethereum/balance/{address}:
+ *   get:
+ *     summary: Retrieve Ethereum account balance
+ *     description: |
+ *       Retrieve the balance of the specified Ethereum account.
+ *       The account address must be a valid Ethereum address.
+ *     tags:
+ *       - Ethereum Task-5 
+ *     parameters:
+ *       - name: address
+ *         in: path
+ *         description: Ethereum account address
+ *         required: true
+ *         type: string
+ *     responses:
+ *       '200':
+ *         description: Successful response with account balance
+ *         schema:
+ *           type: object
+ *           properties:
+ *             address:
+ *               type: string
+ *               description: Ethereum account address
+ *             balance:
+ *               type: string
+ *               description: Account balance in Ether
+ *       '400':
+ *         description: Bad request
+ *         schema:
+ *           type: object
+ *           properties:
+ *             message:
+ *               type: string
+ *               description: Error message indicating the bad request
+ *       '500':
+ *         description: Internal server error
+ *         schema:
+ *           type: object
+ *           properties:
+ *             message:
+ *               type: string
+ *               description: Error message indicating the internal server error
+ */
+
+router.get('/ethereum/balance/:address', apiController.ethereumBalance);
 
 module.exports = router;
 
