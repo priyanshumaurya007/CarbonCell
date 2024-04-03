@@ -27,6 +27,9 @@ const authMiddleware = require('../Middleware/authMiddleware')
  *           schema:
  *             type: object
  *             properties:
+ *               name:
+ *                 type: string
+ *                 description: The name of the user
  *               username:
  *                 type: string
  *                 description: The username of the user

@@ -1,22 +1,27 @@
 const jwt = require('jsonwebtoken');
 const User = require('../Models/User');
 const { userTokens } = require('../Middleware/authMiddleware');
+const UserDTO = require('../RequestPayload/user-request.payload');
 
 const secretKey = 'your_secret_key';
 const userMap = new Map();
 
 const registerUser = async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const userRequestPayload = UserDTO.fromRequest(req);
 
-        if (userMap.has(username)) {
+        if (!userRequestPayload.isValid()) {
+            return res.status(400).json({ message: 'Name, Username and password are required.' });
+        }
+
+        if (userMap.has(userRequestPayload?.username)) {
             return res.status(400).json({ message: 'Username already exists.' });
         }
 
-        const user = new User(username, password);
+        const user = new User(userRequestPayload?.name, userRequestPayload?.username, userRequestPayload?.password);
         await user.hashPassword();
 
-        userMap.set(username, user);
+        userMap.set(userRequestPayload?.username, user);
 
         res.status(201).json({ message: 'User registered successfully.' });
     } catch (error) {
