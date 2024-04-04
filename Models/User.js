@@ -1,18 +1,26 @@
 const bcrypt = require('bcrypt');
 
 class User {
-    constructor(name,username, password) {
+    constructor(name, username, password) {
         this.name = name;
         this.username = username;
         this.password = password;
     }
 
     async hashPassword() {
-        this.password = await bcrypt.hash(this.password, 10);
+        try {
+            this.password = await bcrypt.hash(this.password, 10);
+        } catch (error) {
+            throw new Error('Error hashing password');
+        }
     }
 
     async comparePassword(password) {
-        return await bcrypt.compare(password, this.password);
+        try {
+            return await bcrypt.compare(password, this.password);
+        } catch (error) {
+            throw new Error('Error comparing passwords');
+        }
     }
 }
 
