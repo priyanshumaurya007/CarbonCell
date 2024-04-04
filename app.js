@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const authRoutes = require('./Routes/authRoutes');
-const apiRoutes = require('./Routes/apiRoutes');
+const authRoutes = require('./Routes/auth.routes');
+const taskRoutes = require('./Routes/task.routes');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpecs = require('./swaggerConfig');
 
@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use('/auth', authRoutes);
 
-app.use('/api/v1', apiRoutes);
+app.use('/api/v1', taskRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

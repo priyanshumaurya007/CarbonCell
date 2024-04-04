@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const secretKey = 'your_secret_key';
+const secretKey = process.env.SECRET_KEY || 'my_secret_key';
 
 const userTokens = new Map();
 
@@ -30,4 +30,4 @@ const verifyToken = (req, res, next) => {
     }
 };
 
-module.exports = { verifyToken , userTokens};
+module.exports = { verifyToken, userTokens };

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const apiController = require('../Controllers/apiController');
-const authMiddleware = require('../Middleware/authMiddleware')
+const taskController = require('../Controllers/task.controller');
+const authMiddleware = require('../Middleware/auth.middleware')
 
 /**
  * @swagger
@@ -86,7 +86,7 @@ const authMiddleware = require('../Middleware/authMiddleware')
  *                   description: Error message indicating the internal server error
  */
 
-router.get('/data/retrieve', authMiddleware.verifyToken, apiController.fetchData);
+router.get('/data/retrieve', authMiddleware.verifyToken, taskController.fetchData);
 
 /**
  * @swagger
@@ -134,7 +134,7 @@ router.get('/data/retrieve', authMiddleware.verifyToken, apiController.fetchData
  *               description: Error message indicating the internal server error
  */
 
-router.get('/ethereum/balance/:address', apiController.ethereumBalance);
+router.get('/ethereum/balance/:address', taskController.getEthereumBalance);
 
 module.exports = router;
 
